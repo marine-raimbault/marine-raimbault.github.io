@@ -53,7 +53,7 @@
         },
         "datePublished": "2025-08-31",
         "description": "",
-        "wordCount":  504 ,
+        "wordCount":  829 ,
         "mainEntityOfPage": "True",
         "dateModified": "2025-08-31",
         "image": {
@@ -73,8 +73,7 @@
     
     <meta property="og:title" content="How to Start a Blog (in a Weekend)" />
 <meta property="og:description" content="Why Start a Blog? I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
-If you can write notes for yourself, you can write blog posts for others.
-Getting It Running for Free On Friday, I got my first website live in 5 minutes using GitHub Pages Quickstart ." />
+There is a big potential for people to showcase their work: one can learn a lot from a beginner&rsquo;s process. There are so many ways to stumble upon new topics in ways that experts don&rsquo;t remember." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://marine-raimbault.github.io/posts/how-to-start-a-blog/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-08-31T17:53:19+02:00" />
@@ -85,8 +84,7 @@ Getting It Running for Free On Friday, I got my first website live in 5 minutes 
     
     <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="How to Start a Blog (in a Weekend)"/>
 <meta name="twitter:description" content="Why Start a Blog? I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
-If you can write notes for yourself, you can write blog posts for others.
-Getting It Running for Free On Friday, I got my first website live in 5 minutes using GitHub Pages Quickstart ."/>
+There is a big potential for people to showcase their work: one can learn a lot from a beginner&rsquo;s process. There are so many ways to stumble upon new topics in ways that experts don&rsquo;t remember."/>
 
 
     
@@ -201,7 +199,13 @@ stroke-linejoin="round" class="feather feather-home">
         <nav id="TableOfContents">
   <ul>
     <li><a href="#why-start-a-blog">Why Start a Blog?</a></li>
-    <li><a href="#getting-it-running-for-free">Getting It Running for Free</a></li>
+    <li><a href="#getting-it-running-for-free">Getting It Running for Free</a>
+      <ul>
+        <li><a href="#steps-to-reproduce">Steps to reproduce</a></li>
+        <li><a href="#development-setup">Development setup</a></li>
+        <li><a href="#build--deploy">Build &amp; Deploy</a></li>
+      </ul>
+    </li>
     <li><a href="#what-i-learned-writing-this-post">What I Learned Writing This Post</a></li>
     <li><a href="#my-writing-process">My Writing Process</a></li>
     <li><a href="#my-current-setup">My Current Setup</a></li>
@@ -220,55 +224,135 @@ stroke-linejoin="round" class="feather feather-home">
    authority
 </a>
  in my field, and because writing is way easier than creating videos or podcasts.</p>
-<p>If you can write notes for yourself, you can write blog posts for others.</p>
+<p>There is a big potential for people to showcase their work: one can learn a lot from a beginner&rsquo;s process. There are so many ways to stumble upon new topics in ways that experts don&rsquo;t remember.</p>
+<p><img alt="show your work" src="/images/0001/show_your_work.jpg"></p>
 <h2 id="getting-it-running-for-free">Getting It Running for Free</h2>
 <p>On Friday, I got my first website live in 5 minutes using <a href="https://docs.github.com/en/pages/quickstart" 
    target="_blank" rel="noopener noreferrer">
    GitHub Pages Quickstart
 </a>
-. I googled my name and boom: <a href="https://marine-raimbault.github.io/" 
+. You just have to create a new repo with the name <username>.github.io and set it up with Settings &gt; Pages &gt; &ldquo;Build and deployment&rdquo;, under &ldquo;Branch&rdquo;, use the branch dropdown menu and select &ldquo;GitHub Action&rdquo;. I googled my name and here it was: <a href="https://marine-raimbault.github.io/" 
    target="_blank" rel="noopener noreferrer">
    marine-raimbault.github.io
 </a>
-. Free hosting, working site.</p>
-<p>After tweaking configs and uploading a markdown file, I had my first post. I didn&rsquo;t love the white layout or impersonal feel, but I&rsquo;d reached my first goal: something up and running, ready to iterate upon.</p>
-<p><img alt="My first Jekyll site" src="/0001/jekyll.png"></p>
-<p>The same day I wanted to run it locally to preview posts before publishing. That&rsquo;s when I learned GitHub Pages uses <a href="https://jekyllrb.com/" 
+, my working site, for free.</p>
+<p>It was empty however, so I checked <a href="https://chadbaldwin.net/2021/03/14/how-to-build-a-sql-blog.html" 
+   target="_blank" rel="noopener noreferrer">
+   this explanation
+</a>
+ to understand that I had to do.
+After tweaking configs and uploading a markdown file, I had my first post. I didn&rsquo;t love the white layout or impersonal feel, but I&rsquo;d reached my first goal: something up and running, ready to iterate upon.</p>
+<p><img alt="My first Jekyll site" src="/images/0001/jekyll.png"></p>
+<p>The same day, I wanted to run it locally to preview posts before publishing. That is when I learned GitHub Pages uses <a href="https://jekyllrb.com/" 
    target="_blank" rel="noopener noreferrer">
    Jekyll
 </a>
- under the hood.</p>
-<p>On Sunday, I tried running Jekyll on my laptop but hit errors. Instead of debugging my broken setup, I looked for alternatives. If I had to fix something anyway, might as well pick the best tool.</p>
-<p>This led me to <strong>Hugo</strong> - a static site generator written in Go that&rsquo;s faster than Jekyll. There are tons of alternatives (<a href="https://www.11ty.dev/" 
+ under the hood. I used the command <code>bundle exec jekyll serve</code> as described in the <a href="https://jekyllrb.com/docs/" 
+   target="_blank" rel="noopener noreferrer">
+   Jekyll docs
+</a>
+ to serve it locally.</p>
+<p>On Sunday, I tried running Jekyll on my personal laptop, but hit errors related to a missing dependency, and <code>bundler install</code> (bundler is Ruby&rsquo;s package manager) could not automatically fix it. Instead of debugging my broken setup, I looked for alternatives: If I had to put effort into it anyway, I might as well deliberately choose the tool.</p>
+<p>This led me to <strong>Hugo</strong> - a static site generator written in Go that is faster than Jekyll. There are many alternatives (<a href="https://www.11ty.dev/" 
    target="_blank" rel="noopener noreferrer">
    Eleventy
 </a>
-, Gatsby, Next.js), but Hugo had the speed and flexibility I wanted.</p>
-<p>I followed Hugo&rsquo;s official docs but kept hitting GitHub Pages sync issues. After deleting my repo multiple times, I finally found this <a href="https://www.youtube.com/watch?v=LIFvgrRxdt4" 
+, Astro Gatsby, Next.js), but Hugo had the speed and flexibility I wanted. If you&rsquo;re starting fresh: try Hugo for speed, <a href="https://www.11ty.dev/" 
    target="_blank" rel="noopener noreferrer">
-   10-minute video
+   Eleventy
 </a>
- that actually worked. I used the <a href="https://github.com/hugo-sid/hugo-blog-awesome" 
+ for simplicity, or stick with Jekyll if you don&rsquo;t want to change GitHub&rsquo;s Pages defaults.</p>
+<p>I followed Hugo&rsquo;s official docs, but had issues understanding how the themes work. You can not ignore the themes because they are surprisingly what makes Hugo work. However, the  <a href="https://github.com/hugo-sid/hugo-blog-awesome" 
    target="_blank" rel="noopener noreferrer">
    Hugo Blog Awesome
 </a>
- theme instead of their default.</p>
-<p><img alt="Setup errors I encountered" src="/0001/error.png"></p>
-<p>If you&rsquo;re starting fresh: try Hugo for speed, <a href="https://www.11ty.dev/" 
+ theme I wanted to install did not work out of the box:  When starting, there was only a blank page. I didn&rsquo;t fancy the whole complexity. I had to copy parts of the example page to make it work.</p>
+<p><img alt="Hugo Blog Awesome" src="/images/0001/dark-theme.png"></p>
+<h3 id="steps-to-reproduce">Steps to reproduce</h3>
+<ol>
+<li>
+<p><strong>Install Hugo</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install hugo
+</span></span></code></pre></div><p>(or follow the <a href="https://gohugo.io/getting-started/installing/" 
    target="_blank" rel="noopener noreferrer">
-   Eleventy
+   official install guide
 </a>
- for simplicity, or stick with Jekyll if you don&rsquo;t want to change GitHub&rsquo;s defaults.</p>
+)</p>
+</li>
+<li>
+<p><strong>Choose a theme</strong> from <a href="https://themes.gohugo.io/" 
+   target="_blank" rel="noopener noreferrer">
+   Hugo themes
+</a>
+.
+<em>(Tip: check that the theme is actively maintained and has good docs)</em></p>
+</li>
+<li>
+<p><strong>Follow this <a href="https://www.youtube.com/watch?v=LIFvgrRxdt4" 
+   target="_blank" rel="noopener noreferrer">
+   10-minute video tutorial
+</a>
+</strong>.
+In short, you will:</p>
+<ul>
+<li>
+<p>Create two repos:</p>
+<ul>
+<li><code>blog/</code> → source files (your content)</li>
+<li><code>&lt;username&gt;.github.io/</code> → published site</li>
+</ul>
+</li>
+<li>
+<p>Configure <code>blog/</code> to generate the static site into the <code>public/</code> folder, which is a <strong>git submodule</strong> pointing to <code>&lt;username&gt;.github.io</code>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="development-setup">Development setup</h3>
+<ul>
+<li>
+<p>Run Hugo in development mode (renders drafts too):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo serve -D
+</span></span></code></pre></div></li>
+<li>
+<p>Create a new post:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo new posts/name-of-post.md
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="build--deploy">Build &amp; Deploy</h3>
+<ol>
+<li>
+<p>Generate the site (replace with your theme name):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo -t hugo-blog-awesome
+</span></span></code></pre></div></li>
+<li>
+<p>Commit and push changes to both repos:</p>
+<ul>
+<li>Commit in your <code>blog/</code> repo</li>
+<li>Commit &amp; push the <code>public/</code> submodule (<code>&lt;username&gt;.github.io</code>)</li>
+</ul>
+</li>
+<li>
+<p>Open your site at:</p>
+<pre tabindex="0"><code>https://&lt;&lt;username&gt;&gt;.github.io/
+</code></pre></li>
+</ol>
+<p>And here you go:</p>
+<div style="border: 2px solid #4A90E2; border-radius: 8px; padding: 12px; display: inline-block;">
+<p><img alt="Image of the generated blog" src="/images/0001/blog.png"></p>
+</div>
 <h2 id="what-i-learned-writing-this-post">What I Learned Writing This Post</h2>
-<p>Two mistakes wasted my time:</p>
+<p>Two mistakes wasted my time 🫠:</p>
 <ol>
 <li><strong>Splitting focus</strong> - I wrote while troubleshooting setup problems. Next time: finish technical setup first.</li>
 <li><strong>Being stubborn</strong> - I pieced together multiple docs instead of finding one working guide.</li>
 </ol>
-<p>But once the setup worked, writing was straightforward:</p>
+<p>But once the setup worked, writing was straightforward ✅:</p>
 <ul>
-<li>Start with clear purpose</li>
-<li>Make an outline → break into short sections</li>
+<li>Start with a clear purpose</li>
+<li>Outline → break into short sections</li>
 <li>Keep paragraphs under 80 words</li>
 <li>Add images and links</li>
 <li>Get feedback and refine</li>
@@ -279,28 +363,24 @@ stroke-linejoin="round" class="feather feather-home">
    The Checklist Manifesto
 </a>
 :</p>
-<p><strong>Before Writing:</strong></p>
-<ul>
-<li>Define your purpose</li>
-<li>Draft a simple outline</li>
-<li>Complete technical setup</li>
-</ul>
-<p><strong>While Writing:</strong></p>
-<ul>
-<li>Time yourself: max 25 minutes per section</li>
-<li>New heading every 500 words</li>
-<li>Write like you talk: clear, direct, friendly</li>
-<li>Add 1 image per section</li>
-</ul>
-<p><strong>After Writing:</strong></p>
-<ul>
-<li>Aim for 2500+ words total</li>
-<li>Max 80 words per paragraph</li>
-<li>Credit sources with links</li>
-<li>Proofread for clarity</li>
-<li>End with a clear next step</li>
-</ul>
-<h2 id="my-current-setup">My Current Setup</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl">**Before:**
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Define your purpose
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Draft a simple outline  
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Complete technical setup
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gs">**During:**</span>
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Time yourself: max 25 minutes per section
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> New heading every 500 words
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Write like you talk: clear, direct, friendly
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Add 1 image per section
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gs">**After:**</span>
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Aim for 2500+ words total
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Max 80 words per paragraph
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Credit sources with links
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> Proofread for clarity
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> End with a clear next step
+</span></span></code></pre></div><h2 id="my-current-setup">My Current Setup</h2>
 <ul>
 <li><strong>Ideas</strong>: <a href="https://keep.google.com/" 
    target="_blank" rel="noopener noreferrer">
