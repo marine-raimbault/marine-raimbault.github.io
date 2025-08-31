@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Marine Raimbault Blog</title>
+    <link>https://marine-raimbault.github.io/posts/</link>
+    <description>Recent content in Posts on Marine Raimbault Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 31 Aug 2025 17:53:19 +0200</lastBuildDate><atom:link href="https://marine-raimbault.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Start a Blog (in a Weekend)</title>
+      <link>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</link>
+      <pubDate>Sun, 31 Aug 2025 17:53:19 +0200</pubDate>
+      
+      <guid>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</guid>
+      
+      <description>Why Start a Blog? I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
+If you can write notes for yourself, you can write blog posts for others.
+Getting It Running for Free On Friday, I got my first website live in 5 minutes using GitHub Pages Quickstart .</description>
+      
+    </item>
+    
+  </channel>
+</rss>

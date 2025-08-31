@@ -5,6 +5,32 @@
     <link>https://marine-raimbault.github.io/</link>
     <description>Recent content on Marine Raimbault Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://marine-raimbault.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 31 Aug 2025 17:53:19 +0200</lastBuildDate><atom:link href="https://marine-raimbault.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Start a Blog (in a Weekend)</title>
+      <link>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</link>
+      <pubDate>Sun, 31 Aug 2025 17:53:19 +0200</pubDate>
+      
+      <guid>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</guid>
+      
+      <description>Why Start a Blog? I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
+If you can write notes for yourself, you can write blog posts for others.
+Getting It Running for Free On Friday, I got my first website live in 5 minutes using GitHub Pages Quickstart .</description>
+      
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://marine-raimbault.github.io/pages/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://marine-raimbault.github.io/pages/about/</guid>
+      
+      <description>Welcome to my blog ! I&amp;rsquo;m Marine, passionate about exploring new things and documenting what I learn along the way.
+What You&amp;rsquo;ll Find Here This blog is where I document my progress, share insights, and explore various topics that interest me. I believe in the power of showing my work: to me, knowledge is like a flame; the more you share it, the brighter it burns. 🔥</description>
+      
+    </item>
+    
   </channel>
 </rss>
