@@ -1,34 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Marine Raimbault Blog</title>
-    <link>https://marine-raimbault.github.io/</link>
-    <description>Recent content on Marine Raimbault Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <link>https://marine-raimbault.github.io</link>
+    <description>Together, we thrive. 🌊</description>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 31 Aug 2025 17:53:19 +0200</lastBuildDate><atom:link href="https://marine-raimbault.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://marine-raimbault.github.io/index.xml" rel="self" type="application/rss+xml"/>
+    
     <item>
       <title>How to Start a Blog (in a Weekend)</title>
       <link>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</link>
-      <pubDate>Sun, 31 Aug 2025 17:53:19 +0200</pubDate>
-      
       <guid>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</guid>
-      
-      <description>Why Start a Blog? I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
-There is a significant potential for people to showcase their work, as one can learn a great deal from a beginner&amp;rsquo;s process. There are so many ways to stumble upon new topics in ways that experts don&amp;rsquo;t remember.</description>
-      
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://marine-raimbault.github.io/pages/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://marine-raimbault.github.io/pages/about/</guid>
-      
-      <description>Welcome to my blog ! I&amp;rsquo;m Marine, passionate about exploring new things and documenting what I learn along the way.
-What You&amp;rsquo;ll Find Here This blog is where I document my progress, share insights, and explore various topics that interest me. I believe in the power of showing my work: to me, knowledge is like a flame; the more you share it, the brighter it burns. 🔥</description>
-      
+      <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+Why Start a Blog?
+
+I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
+
+]]></description>
     </item>
     
   </channel>
