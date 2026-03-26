@@ -8,6 +8,16 @@
     <atom:link href="https://marine-raimbault.github.io/index.xml" rel="self" type="application/rss+xml"/>
     
     <item>
+      <title>Welcome to the PATH: Isolating Legacy Perl to Reduce Cognitive Load</title>
+      <link>https://marine-raimbault.github.io/posts/welcome-to-the-PATH/</link>
+      <guid>https://marine-raimbault.github.io/posts/welcome-to-the-PATH/</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+On February 27, 2026, I had a meeting with my team lead, Pascal. The invite simply said “Discussion Marine &lt;&gt; Pascal”. I wondered if I had done something wrong.
+That is why my first reaction to]]></description>
+    </item>
+    
+    <item>
       <title>How to Start a Blog (in a Weekend)</title>
       <link>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</link>
       <guid>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</guid>
