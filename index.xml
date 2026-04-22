@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Marine Raimbault Blog</title>
-    <link>https://marine-raimbault.github.io</link>
+    <link>https://marine-raimbault.com</link>
     <description>Together, we thrive. 🌊</description>
     <language>en-gb</language>
-    <atom:link href="https://marine-raimbault.github.io/index.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://marine-raimbault.com/index.xml" rel="self" type="application/rss+xml"/>
     
     <item>
       <title>Mental Models: DevOps</title>
-      <link>https://marine-raimbault.github.io/posts/mental-models-devops/</link>
-      <guid>https://marine-raimbault.github.io/posts/mental-models-devops/</guid>
+      <link>https://marine-raimbault.com/posts/mental-models-devops/</link>
+      <guid>https://marine-raimbault.com/posts/mental-models-devops/</guid>
       <pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[
 New to DevOps and drowning in buzzwords — CALMS, DORA, The Three Ways, the infinity loop? Here’s one picture that ties them together, plus a mnemonic you’ll actually remember. Ten minutes, four model]]></description>
@@ -18,8 +18,8 @@ New to DevOps and drowning in buzzwords — CALMS, DORA, The Three Ways, the inf
     
     <item>
       <title>Welcome to the PATH: Isolating Legacy Perl to Reduce Cognitive Load</title>
-      <link>https://marine-raimbault.github.io/posts/welcome-to-the-PATH/</link>
-      <guid>https://marine-raimbault.github.io/posts/welcome-to-the-PATH/</guid>
+      <link>https://marine-raimbault.com/posts/welcome-to-the-PATH/</link>
+      <guid>https://marine-raimbault.com/posts/welcome-to-the-PATH/</guid>
       <pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[
 On February 27, 2026, I had a meeting with my team lead, Pascal. The invite simply said “Discussion Marine &lt;&gt; Pascal”. I wondered if I had done something wrong.
@@ -28,8 +28,8 @@ That is why my first reaction to]]></description>
     
     <item>
       <title>How to Start a Blog (in a Weekend)</title>
-      <link>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</link>
-      <guid>https://marine-raimbault.github.io/posts/how-to-start-a-blog/</guid>
+      <link>https://marine-raimbault.com/posts/how-to-start-a-blog/</link>
+      <guid>https://marine-raimbault.com/posts/how-to-start-a-blog/</guid>
       <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[
 Why Start a Blog?
