@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <title>Solving a bug with an AI agent as a junior developer, and still learning - Marine Raimbault Blog</title>
+  <meta name="description" content="Together, we thrive. 🌊">
+  <meta name="author" content="Marine Raimbault">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Marine Raimbault Blog" href="/index.xml">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="site-home" aria-label="Home">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/posts/" class="active">Posts</a>
+        <a href="/about/">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post">
+  <header>
+    <h1>Solving a bug with an AI agent as a junior developer, and still learning</h1>
+    <time datetime="2026-10-16">16 Oct 2026</time>
+  </header>
+
+  
+  <details class="toc">
+    <summary>Table of Contents</summary>
+    <nav>
+      <ul>
+        
+        <li class="toc-h2">
+          <a href="#1-the-fear">
+1. The fear</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#2-the-bug">
+2. The bug</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#3-step-1-find-the-cause-myself-before-reading-code">
+3. Step 1: find the cause myself, before reading code</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#4-step-2-recap-what-i-understood-and-ask-for-feedback">
+4. Step 2: recap what I understood and ask for feedback</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#5-step-3-the-agent-writes-the-fix-i-read-it">
+5. Step 3: the agent writes the fix, I read it</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#6-the-pr-review-i-dont-like-polling">
+6. The PR review: “I don’t like polling”</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#7-what-i-keep">
+7. What I keep</a>
+        </li>
+        
+      </ul>
+    </nav>
+  </details>
+  
+
+  <div class="post-content">
+    <h2 id="1-the-fear">
+1. The fear</h2>
+<p>
+I’m a junior developer. I started learning the job in an apprenticeship, through pair programming. I was amazed how much you learn when two people build a shared understanding of the codebase while they code.</p>
+<p>
+  <img src="/images/0004/before-llms.png" alt="Before LLMs: a coder alone gets a solution approved by another coder, or two coders pair. Blue scribbles mark understanding in every head.">
+</p>
+<p>
+Using LLMs felt good at first: what seemed like a better result, and so fast. But it was a black box. I was offloading the thinking. Do I really understand, or do I just feel like I understand? Am I becoming dumb?</p>
+<p>
+  <img src="/images/0004/after-llms.png" alt="After LLMs: the LLM turns the ticket into a solution, the human approves it and asks: looks good, maybe? But what did I learn?">
+</p>
+<p>
+In this post, I show how quizzes and recaps help me keep learning while an agent writes the code. It is still a work in progress: so far, n = 2. But active recall and active questioning are proven learning methods, and software engineering is about discovery and learning. So I’m giving it a try, and so far I feel it helps me a lot.</p>
+<p>
+  <img src="/images/0004/llms-quiz-pair.png" alt="With LLMs, quiz and pair programming: the LLM explains, the pair recaps their understanding into a better ticket, the agent proposes a solution, and the pair sends it back until it meets the guidelines.">
+</p>
+<h2 id="2-the-bug">
+2. The bug</h2>
+<p>
+I work on Q.wiki, a wiki where companies write down how they work. A page can have attachments, for example an Excel file. A user can convert an attachment into a <strong>file page</strong>: a page of its own for that file, so other pages can link to it.</p>
+<p>
+After the conversion, a link to the new file page appears. But the link is red, which means “this page doesn’t exist”. After a reload (F5), the link works.</p>
+<h2 id="3-step-1-find-the-cause-myself-before-reading-code">
+3. Step 1: find the cause myself, before reading code</h2>
+<p>
+I watched the network requests while I converted an attachment.</p>
+<blockquote>
+  <p>
+<strong>Me:</strong> All requests return 200 (success). But the link is red. Where do I look next?  </p>
+  <p>
+<strong>Agent:</strong> Ask instead: why does the browser think this page doesn’t exist?  </p>
+</blockquote>
+<p>
+One request asks the server “does this page exist?”. The answer: <code class="inline">notExist</code>. A few seconds later, I sent the same request again. The answer: <code class="inline">active</code>.</p>
+<p>
+So saving works. It’s a timing issue.</p>
+<blockquote>
+  <p>
+<strong>Me:</strong> But why does the link stay red?  </p>
+  <p>
+<strong>Agent:</strong> The browser keeps every answer in a <strong>cache</strong>, a small notebook. Once it says “doesn’t exist”, the browser never asks again.  </p>
+</blockquote>
+<h2 id="4-step-2-recap-what-i-understood-and-ask-for-feedback">
+4. Step 2: recap what I understood and ask for feedback</h2>
+<blockquote>
+  <p>
+<strong>Agent:</strong> In your own words: what is the bug, how did you prove it, and what is the shape of the fix?  </p>
+  <p>
+<strong>Me:</strong> The frontend asks too early, and only once. I proved it because the requests returned 200, so they worked. The fix: the attachment updates the link once it gets the id.  </p>
+</blockquote>
+<p>
+The feedback:</p>
+<ul>
+  <li>
+✅ <strong>The bug:</strong> right.  </li>
+  <li>
+❌ <strong>The proof:</strong> a 200 only shows that the request worked, not that the timing is wrong. The real proof was <strong>the same request asked twice</strong>: first <code class="inline">notExist</code>, then <code class="inline">active</code>.  </li>
+  <li>
+❌ <strong>The fix:</strong> the browser has to ask again, <strong>repeatedly, with a limit</strong>.  </li>
+</ul>
+<h2 id="5-step-3-the-agent-writes-the-fix-i-read-it">
+5. Step 3: the agent writes the fix, I read it</h2>
+<blockquote>
+  <p>
+<strong>Me:</strong> I think I understand the problem now, but I don’t understand your solution.  </p>
+</blockquote>
+<p>
+The fix asks again every second, at most 10 times. A spinner shows in the meantime. This is the agent’s first version:</p>
+<pre><code class="ts">const FILE_PAGE_CHECK_INTERVAL = 1000; // milliseconds between two checks
+const FILE_PAGE_MAX_CHECKS = 10;
+
+// after the conversion: checksLeft starts at FILE_PAGE_MAX_CHECKS
+awaitFilePage(response.filePageId, FILE_PAGE_MAX_CHECKS);
+
+function awaitFilePage(filePageId: string, checksLeft: number) {
+    filePageCheckTimer = setTimeout(async () =&gt; {
+        const filePage = await contentInfos.refresh(filePageId);
+        if (filePage?.state === &#39;active&#39; || checksLeft &lt;= 1) {
+            isCreatingFilepage.value = false;
+            return;
+        }
+        awaitFilePage(filePageId, checksLeft - 1);
+    }, FILE_PAGE_CHECK_INTERVAL);
+}</code></pre>
+<p>
+<strong>Why a limit?</strong> If the server job fails, the page never appears. Without a limit, the browser would keep asking for as long as the tab is open. (<em>Release It!</em>, Michael Nygard)</p>
+<p>
+Then I questioned the agent’s code:</p>
+<blockquote>
+  <p>
+<strong>Me:</strong> I don’t like the name <code class="inline">awaitFilePage</code>. <code class="inline">await</code> is a JavaScript keyword: it promises that the function returns a Promise, and this one returns nothing. What the function waits for is the page to exist. Let’s call it <code class="inline">waitUntilFilePageExists</code>.  </p>
+</blockquote>
+<p>
+The renamed version is the one that got merged:</p>
+<pre><code class="ts">const FILE_PAGE_CHECK_INTERVAL = 1000; // milliseconds between two checks
+const FILE_PAGE_MAX_CHECKS = 10;
+
+waitUntilFilePageExists(response.filePageId, FILE_PAGE_MAX_CHECKS);
+
+function waitUntilFilePageExists(filePageId: string, checksLeft: number) {
+    filePageCheckTimer = setTimeout(async () =&gt; {
+        const filePage = await contentInfos.refresh(filePageId);
+        if (isUnmounted) return;
+
+        if (filePage?.state === &#39;active&#39; || checksLeft &lt;= 1) {
+            isCreatingFilepage.value = false;
+            return;
+        }
+        waitUntilFilePageExists(filePageId, checksLeft - 1);
+    }, FILE_PAGE_CHECK_INTERVAL);
+}</code></pre>
+<h2 id="6-the-pr-review-i-dont-like-polling">
+6. The PR review: “I don’t like polling”</h2>
+<p>
+I asked a senior developer to review the pull request (PR). Their comment:</p>
+<blockquote>
+  <p>
+<strong>Senior developer:</strong> I don’t like polling. I would rather listen to an event from the server.  </p>
+</blockquote>
+<p>
+<strong>Learning:</strong> consider the different options. There are three ways a browser hears from a server:</p>
+<p>
+<strong>Request/response:</strong> ask once, get one answer.</p>
+<p>
+  <img src="/images/0004/http-request.png" alt="HTTP request: the client asks &quot;get me the page data&quot;, the server answers &quot;here the page data&quot;.">
+</p>
+<p>
+<strong>Polling:</strong> the same question on a timer, until the answer changes.</p>
+<p>
+  <img src="/images/0004/polling.png" alt="Polling: the client asks &quot;Ready?&quot; four times, the server finally says &quot;yeah&quot;.">
+</p>
+<p>
+<strong>Push (WebSocket / SSE):</strong> subscribe once, the server speaks when there is news.</p>
+<p>
+  <img src="/images/0004/websocket.png" alt="WebSocket: the client says &quot;I wanna be informed about the page&quot;, the server says &quot;ok…&quot; and later &quot;here the page data&quot;.">
+</p>
+<p>
+We kept the polling solution as a first approach. Our backend did not have a “file page converted” event yet, and adding it would have been too much overhead for this bug.</p>
+<h2 id="7-what-i-keep">
+7. What I keep</h2>
+<ul>
+  <li>
+<strong>The process:</strong>    <ol>
+      <li>
+Reproduce the bug myself.      </li>
+      <li>
+Recap what I understood and get quizzed by the agent.      </li>
+      <li>
+Let the agent write the PR, then review it and ask a senior for review.      </li>
+    </ol>
+  </li>
+  <li>
+<strong>Three ways a browser talks to a server:</strong> request/response, polling, push.  </li>
+</ul>
+<p>
+I’d like to know what you think. Have you tried something like this? The quizzes in this post come from my <code class="inline">learn</code> skill for Claude Code.</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/marine-raimbault/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@MarineRaimbault/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/marine-raimbault-06372b273/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="/index.xml" aria-label="RSS">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
+      </a>
+    </div>
+    <p>Marine Raimbault &mdash; Together, we thrive. 🌊</p>
+  </footer>
+
+  <a href="#" class="go-to-top" aria-label="Go to top">&uarr;</a>
+
+  <script>
+    document.querySelectorAll('pre').forEach(function(pre) {
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var text = code ? code.textContent : pre.textContent;
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      pre.appendChild(btn);
+    });
+  </script>
+</body>
+</html>

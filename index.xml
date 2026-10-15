@@ -8,6 +8,17 @@
     <atom:link href="https://marine-raimbault.com/index.xml" rel="self" type="application/rss+xml"/>
     
     <item>
+      <title>Solving a bug with an AI agent as a junior developer, and still learning</title>
+      <link>https://marine-raimbault.com/posts/solving-a-bug-with-an-ai-agent-as-a-junior-developer/</link>
+      <guid>https://marine-raimbault.com/posts/solving-a-bug-with-an-ai-agent-as-a-junior-developer/</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+1. The fear
+
+I’m a junior developer. I started learning the job in an apprenticeship, through pair programming. I was amazed how much you learn when two people build a shared understanding of the cod]]></description>
+    </item>
+    
+    <item>
       <title>Mental Models: DevOps</title>
       <link>https://marine-raimbault.com/posts/mental-models-devops/</link>
       <guid>https://marine-raimbault.com/posts/mental-models-devops/</guid>
