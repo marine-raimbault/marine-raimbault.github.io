@@ -127,7 +127,7 @@ So saving works. It’s a timing issue.</p>
   <p>
 <strong>Agent:</strong> In your own words: what is the bug, how did you prove it, and what is the shape of the fix?  </p>
   <p>
-<strong>Me:</strong> The frontend asks too early, and only once. I proved it because the requests returned 200, so they worked. The fix: the attachment updates the link once it gets the id.  </p>
+<strong>Me:</strong> The frontend asks too early, and only once. I proved it with two requests: the first one said the page doesn’t exist, the same one a bit later said it exists. The fix: the attachment updates the link once it gets the id.  </p>
 </blockquote>
 <p>
 The feedback:</p>
@@ -135,7 +135,7 @@ The feedback:</p>
   <li>
 ✅ <strong>The bug:</strong> right.  </li>
   <li>
-❌ <strong>The proof:</strong> a 200 only shows that the request worked, not that the timing is wrong. The real proof was <strong>the same request asked twice</strong>: first <code class="inline">notExist</code>, then <code class="inline">active</code>.  </li>
+✅ <strong>The proof:</strong> right. Same request, two answers, only time in between.  </li>
   <li>
 ❌ <strong>The fix:</strong> the browser has to ask again, <strong>repeatedly, with a limit</strong>.  </li>
 </ul>
