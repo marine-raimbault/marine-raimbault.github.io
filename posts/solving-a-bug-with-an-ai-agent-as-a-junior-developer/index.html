@@ -38,38 +38,38 @@
       <ul>
         
         <li class="toc-h2">
-          <a href="#1-the-fear">
-1. The fear</a>
+          <a href="#the-fear">
+The fear</a>
         </li>
         
         <li class="toc-h2">
-          <a href="#2-the-bug">
-2. The bug</a>
+          <a href="#the-bug-a-red-link-that-works-after-a-reload">
+The bug: a red link that works after a reload</a>
         </li>
         
         <li class="toc-h2">
-          <a href="#3-step-1-find-the-cause-myself-before-reading-code">
-3. Step 1: find the cause myself, before reading code</a>
+          <a href="#step-1-find-the-cause-myself-before-reading-code">
+Step 1: find the cause myself, before reading code</a>
         </li>
         
         <li class="toc-h2">
-          <a href="#4-step-2-recap-what-i-understood-and-ask-for-feedback">
-4. Step 2: recap what I understood and ask for feedback</a>
+          <a href="#step-2-explain-it-back-and-get-quizzed">
+Step 2: explain it back and get quizzed</a>
         </li>
         
         <li class="toc-h2">
-          <a href="#5-step-3-the-agent-writes-the-fix-i-read-it">
-5. Step 3: the agent writes the fix, I read it</a>
+          <a href="#step-3-the-agent-writes-the-fix-i-question-it">
+Step 3: the agent writes the fix, I question it</a>
         </li>
         
         <li class="toc-h2">
-          <a href="#6-the-pr-review-i-dont-like-polling">
-6. The PR review: “I don’t like polling”</a>
+          <a href="#the-review-i-dont-like-polling">
+The review: “I don’t like polling”</a>
         </li>
         
         <li class="toc-h2">
-          <a href="#7-what-i-keep">
-7. What I keep</a>
+          <a href="#what-i-keep">
+What I keep</a>
         </li>
         
       </ul>
@@ -78,8 +78,8 @@
   
 
   <div class="post-content">
-    <h2 id="1-the-fear">
-1. The fear</h2>
+    <h2 id="the-fear">
+The fear</h2>
 <p>
 I’m a junior developer. I started learning the job in an apprenticeship, through pair programming. I was amazed how much you learn when two people build a shared understanding of the codebase while they code.</p>
 <p>
@@ -95,14 +95,14 @@ In this post, I show how quizzes and recaps help me keep learning while an agent
 <p>
   <img src="/images/0004/llms-quiz-pair.png" alt="With LLMs, quiz and pair programming: the LLM explains, the pair recaps their understanding into a better ticket, the agent proposes a solution, and the pair sends it back until it meets the guidelines.">
 </p>
-<h2 id="2-the-bug">
-2. The bug</h2>
+<h2 id="the-bug-a-red-link-that-works-after-a-reload">
+The bug: a red link that works after a reload</h2>
 <p>
 I work on Q.wiki, a wiki where companies write down how they work. A page can have attachments, for example an Excel file. A user can convert an attachment into a <strong>file page</strong>: a page of its own for that file, so other pages can link to it.</p>
 <p>
 After the conversion, a link to the new file page appears. But the link is red, which means “this page doesn’t exist”. After a reload (F5), the link works.</p>
-<h2 id="3-step-1-find-the-cause-myself-before-reading-code">
-3. Step 1: find the cause myself, before reading code</h2>
+<h2 id="step-1-find-the-cause-myself-before-reading-code">
+Step 1: find the cause myself, before reading code</h2>
 <p>
 I watched the network requests while I converted an attachment.</p>
 <blockquote>
@@ -121,8 +121,8 @@ So saving works. It’s a timing issue.</p>
   <p>
 <strong>Agent:</strong> The browser keeps every answer in a <strong>cache</strong>, a small notebook. Once it says “doesn’t exist”, the browser never asks again.  </p>
 </blockquote>
-<h2 id="4-step-2-recap-what-i-understood-and-ask-for-feedback">
-4. Step 2: recap what I understood and ask for feedback</h2>
+<h2 id="step-2-explain-it-back-and-get-quizzed">
+Step 2: explain it back and get quizzed</h2>
 <blockquote>
   <p>
 <strong>Agent:</strong> In your own words: what is the bug, how did you prove it, and what is the shape of the fix?  </p>
@@ -139,8 +139,8 @@ The feedback:</p>
   <li>
 ❌ <strong>The fix:</strong> the browser has to ask again, <strong>repeatedly, with a limit</strong>.  </li>
 </ul>
-<h2 id="5-step-3-the-agent-writes-the-fix-i-read-it">
-5. Step 3: the agent writes the fix, I read it</h2>
+<h2 id="step-3-the-agent-writes-the-fix-i-question-it">
+Step 3: the agent writes the fix, I question it</h2>
 <blockquote>
   <p>
 <strong>Me:</strong> I think I understand the problem now, but I don’t understand your solution.  </p>
@@ -190,8 +190,8 @@ function waitUntilFilePageExists(filePageId: string, checksLeft: number) {
         waitUntilFilePageExists(filePageId, checksLeft - 1);
     }, FILE_PAGE_CHECK_INTERVAL);
 }</code></pre>
-<h2 id="6-the-pr-review-i-dont-like-polling">
-6. The PR review: “I don’t like polling”</h2>
+<h2 id="the-review-i-dont-like-polling">
+The review: “I don’t like polling”</h2>
 <p>
 I asked a senior developer to review the pull request (PR). Their comment:</p>
 <blockquote>
@@ -217,8 +217,8 @@ I asked a senior developer to review the pull request (PR). Their comment:</p>
 </p>
 <p>
 We kept the polling solution as a first approach. Our backend did not have a “file page converted” event yet, and adding it would have been too much overhead for this bug.</p>
-<h2 id="7-what-i-keep">
-7. What I keep</h2>
+<h2 id="what-i-keep">
+What I keep</h2>
 <ul>
   <li>
 <strong>The process:</strong>    <ol>
@@ -281,5 +281,19 @@ I’d like to know what you think. Have you tried something like this? The quizz
       pre.appendChild(btn);
     });
   </script>
+<script>
+  (function() {
+    let initial = null;
+    setInterval(async () => {
+      try {
+        const r = await fetch('/dev_reload.txt', { cache: 'no-store' });
+        if (!r.ok) return;
+        const t = await r.text();
+        if (initial === null) initial = t;
+        else if (initial !== t) location.reload();
+      } catch (_) {}
+    }, 1000);
+  })();
+</script>
 </body>
 </html>
