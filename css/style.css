@@ -261,9 +261,4 @@ footer {
   .post-list time { margin-left: 0; }
 }
 
-.newsletter { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-secondary); text-align: center; }
-.newsletter h2 { font-size: 1.3rem; font-weight: 400; margin-bottom: 0.5rem; }
-.newsletter p { color: var(--text-muted); margin-bottom: 1rem; }
-.newsletter input { padding: 0.5rem; width: 16rem; max-width: 100%; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); }
-.newsletter button { padding: 0.5rem 1rem; border: none; border-radius: 4px; background: var(--accent); color: var(--bg); cursor: pointer; }
-.newsletter button:hover { background: var(--accent-hover); }
+.newsletter { margin-top: 3rem; }
