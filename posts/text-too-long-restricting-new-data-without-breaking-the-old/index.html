@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <title>Text too long: restricting new data without breaking the old - Marine Raimbault Blog</title>
+  <meta name="description" content="Adding a rule for new data is easy. The hard part is the data that is already there.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Text too long: restricting new data without breaking the old">
+  <meta property="og:description" content="Adding a rule for new data is easy. The hard part is the data that is already there.">
+  <meta property="og:image" content="https://marine-raimbault.com/images/0005/write-without-check.png">
+  <meta property="og:url" content="https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="author" content="Marine Raimbault">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Marine Raimbault Blog" href="/index.xml">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="site-home" aria-label="Home">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/posts/" class="active">Posts</a>
+        <a href="/about/">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post">
+  <header>
+    <h1>Text too long: restricting new data without breaking the old</h1>
+    <time datetime="2026-10-19">19 Oct 2026</time>
+  </header>
+
+  
+  <details class="toc">
+    <summary>Table of Contents</summary>
+    <nav>
+      <ul>
+        
+        <li class="toc-h2">
+          <a href="#one-label-broke-every-page">
+One label broke every page</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#guard-the-write">
+Guard the write</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#migrate-the-old-data">
+Migrate the old data</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#shipping-it-end-to-end">
+Shipping it end to end</a>
+        </li>
+        
+        <li class="toc-h2">
+          <a href="#next-time-you-add-a-limit">
+Next time you add a limit</a>
+        </li>
+        
+      </ul>
+    </nav>
+  </details>
+  
+
+  <div class="post-content">
+    <p>
+Adding a rule for new data is easy. The hard part is the data that is already there.</p>
+<p>
+Imagine an app where users type labels, and one day we decide: at most 250 characters. We add the check, ship it, done? Not quite. Every label saved before today is still stored, and some are longer.</p>
+<p>
+That’s what happened to us: one 504-character label broke every page built from one form. Here’s the two-step fix we used: guard the write, then migrate the old data.</p>
+<h2 id="one-label-broke-every-page">
+One label broke every page</h2>
+<p>
+Our form builder is a tool where customers build their own forms, with fields and dropdown options. It accepted text of any length. But every page built from a form checks each label against 250 characters when it loads. So one 504-character label broke all of them:</p>
+<pre><code>The value &#39;FormFieldLabel&#39; is longer than max of 250.</code></pre>
+<p>
+  <img src="/images/0005/write-without-check.png" alt="The form builder saves a 504-character label without a check; reading it back checks for at most 250 characters, so every page built from this form fails to load">
+</p>
+<h2 id="guard-the-write">
+Guard the write</h2>
+<p>
+The read side (loading a page) already had the rule; the write side (saving the form) didn’t. So we put the same 250 limit on the write side, where the data comes in. The limit lives in two places, on purpose. The backend decides; the editor only helps.</p>
+<p>
+Backend (the real rule): Eric Evans, in <em>Domain-Driven Design</em>, calls this a value object. It checks its own rules when it’s created, so an invalid value never enters the system.</p>
+<pre><code class="perl">AtomicValue( name(&#39;Label&#39;), typeStr( max =&gt; 250 ) );
+
+Label-&gt;create($longText);   # 504 characters: save refused
+Label-&gt;create(&#39;Audit A&#39;);   # ok: saved</code></pre>
+<p>
+Editor (a convenience):</p>
+<pre><code class="html">&lt;input v-model=&quot;label&quot; maxlength=&quot;250&quot;&gt;</code></pre>
+<p>
+A test checks that the input stops at 250.</p>
+<p>
+So the limit is written twice:</p>
+<ul>
+  <li>
+<strong>Backend check missing</strong>: bad data gets in. That was the bug.  </li>
+  <li>
+<strong>Editor check missing or wrong</strong>: the user only gets “refused” on save. Nothing breaks.  </li>
+  <li>
+<strong>The risk</strong>: someone changes one 250 and forgets the other. Annoying, but safe.  </li>
+</ul>
+<p>
+  <img src="/images/0005/two-copies-of-one-rule.png" alt="The editor stops typing at 250 (helps); the backend check allows at most 250 (decides) and refuses a 504-character API call, so every page loads">
+</p>
+<h2 id="migrate-the-old-data">
+Migrate the old data</h2>
+<p>
+With the backend check, no new text that is too long can be saved. But the old data is still there. We chose to cut the too-long labels down to 250 characters, so we need a migration.</p>
+<p>
+The migration is one line of SQL:</p>
+<pre><code class="sql">UPDATE options SET label = LEFT(label, 250) WHERE length(label) &gt; 250;</code></pre>
+<h2 id="shipping-it-end-to-end">
+Shipping it end to end</h2>
+<p>
+The cut can’t be undone, so we try it first where a mistake costs nothing.</p>
+<p>
+First, tests, from small to big:</p>
+<ul>
+  <li>
+<strong>Unit tests</strong>: the rule alone. A 504-character label is cut to 250, a 250-character one stays as it is, and an old form with no labels at all stays unchanged.  </li>
+  <li>
+<strong>Integration tests</strong>: against a real database. The draft, the published version and its history are all cut, and running the migration a second time changes nothing.  </li>
+</ul>
+<p>
+Then the migration passes three places:</p>
+<ul>
+  <li>
+<strong>Local</strong>: our laptops, with test data.  </li>
+  <li>
+<strong>Staging</strong>: a copy of production, with the customers’ data.  </li>
+  <li>
+<strong>Production</strong>: the real customers. Each customer (a <em>tenant</em>) has its own data.  </li>
+</ul>
+<p>
+  <img src="/images/0005/from-unit-test-to-production.png" alt="A staircase from unit test, integration test, local laptop and staging up to production with tenants A, B and C: at the bottom a mistake costs nothing, at the top it hits every customer">
+</p>
+<p>
+It ships in two pull requests. The first one only makes the migration runnable by hand. We ran it locally, then on staging, and checked that the pages load again.</p>
+<p>
+The second one makes it run automatically for every tenant when production is updated. Nobody runs it by hand on production.</p>
+<h2 id="next-time-you-add-a-limit">
+Next time you add a limit</h2>
+<ol>
+  <li>
+<strong>Guard the write</strong>: the backend refuses new data that breaks the limit; the editor helps the user stay under it.  </li>
+  <li>
+<strong>Migrate the old data</strong>: cut what is already stored, tested from small to big before it reaches production.  </li>
+</ol>
+<p>
+Before adding a limit, look at the data you already have: how much of it is already too long?</p>
+
+  </div>
+
+  <form class="newsletter" action="https://app.kit.com/forms/10059289/subscriptions" method="post">
+    <h2>Get one email a month</h2>
+    <p>What I learn as a junior developer, from domain-driven design and event sourcing to CI/CD and Kubernetes.</p>
+    <input type="email" name="email_address" placeholder="Email address" aria-label="Email address" required>
+    <button type="submit">Subscribe</button>
+  </form>
+</article>
+
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/marine-raimbault/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@MarineRaimbault/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/marine-raimbault-06372b273/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="/index.xml" aria-label="RSS">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
+      </a>
+    </div>
+    <p>Marine Raimbault &mdash; Together, we thrive. 🌊</p>
+  </footer>
+
+  <a href="#" class="go-to-top" aria-label="Go to top">&uarr;</a>
+
+  <script>
+    document.querySelectorAll('pre').forEach(function(pre) {
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var text = code ? code.textContent : pre.textContent;
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      pre.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
