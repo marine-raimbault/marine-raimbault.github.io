@@ -12,10 +12,7 @@
       <link>https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/</link>
       <guid>https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/</guid>
       <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[
-Adding a rule for new data is easy. The hard part is the data that is already there.
-
-Imagine an app where users type labels, and one day we decide: at most 250 characters. We add the check, ship it,]]></description>
+      <description><![CDATA[Adding a rule for new data is easy. The hard part is the data that is already there.]]></description>
     </item>
     
     <item>
@@ -23,10 +20,7 @@ Imagine an app where users type labels, and one day we decide: at most 250 chara
       <link>https://marine-raimbault.com/posts/solving-a-bug-with-an-ai-agent-as-a-junior-developer/</link>
       <guid>https://marine-raimbault.com/posts/solving-a-bug-with-an-ai-agent-as-a-junior-developer/</guid>
       <pubDate>Fri, 16 Oct 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[
-The fear
-
-I’m a junior developer. I started learning the job in an apprenticeship, through pair programming. I was amazed how much you learn when two people build a shared understanding of the codeba]]></description>
+      <description><![CDATA[I’m a junior developer. I started learning the job in an apprenticeship, through pair programming. I was amazed how much you learn when two people build a shared understanding of the codebase while they code.]]></description>
     </item>
     
     <item>
@@ -34,8 +28,7 @@ I’m a junior developer. I started learning the job in an apprenticeship, throu
       <link>https://marine-raimbault.com/posts/mental-models-devops/</link>
       <guid>https://marine-raimbault.com/posts/mental-models-devops/</guid>
       <pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[
-New to DevOps and drowning in buzzwords — CALMS, DORA, The Three Ways, the infinity loop? Here’s one picture that ties them together, plus a mnemonic you’ll actually remember. Ten minutes, four model]]></description>
+      <description><![CDATA[New to DevOps and drowning in buzzwords — CALMS, DORA, The Three Ways, the infinity loop? Here’s one picture that ties them together, plus a mnemonic you’ll actually remember. Ten minutes, four models, done.]]></description>
     </item>
     
     <item>
@@ -43,9 +36,9 @@ New to DevOps and drowning in buzzwords — CALMS, DORA, The Three Ways, the inf
       <link>https://marine-raimbault.com/posts/welcome-to-the-PATH/</link>
       <guid>https://marine-raimbault.com/posts/welcome-to-the-PATH/</guid>
       <pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[
-On February 27, 2026, I had a meeting with my team lead, Pascal. The invite simply said “Discussion Marine &lt;&gt; Pascal”. I wondered if I had done something wrong.
-That is why my first reaction to]]></description>
+      <description><![CDATA[On February 27, 2026, I had a meeting with my team lead, Pascal. The invite simply said “Discussion Marine &lt;&gt; Pascal”. I wondered if I had done something wrong.
+That is why my first reaction to his question was relief. He asked, “Do you want to work with the Perl legacy code full time?”
+Then came the surprise. Honestly, that was not the first thing that would come to mind when I was thinking about my full-time start. I had just graduated from a dual apprenticeship/university program. I thought I would spend the following years programming in our recent tech stack, namely Vue.js/TypeScript for the frontend and Elixir in the backend, having to touch our legacy Perl code only occasionally.]]></description>
     </item>
     
     <item>
@@ -53,12 +46,7 @@ That is why my first reaction to]]></description>
       <link>https://marine-raimbault.com/posts/how-to-start-a-blog/</link>
       <guid>https://marine-raimbault.com/posts/how-to-start-a-blog/</guid>
       <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[
-Why Start a Blog?
-
-I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.
-
-]]></description>
+      <description><![CDATA[I started my blog for three reasons: to show my work and document my progress, to build authority in my field, and because writing is way easier than creating videos or podcasts.]]></description>
     </item>
     
   </channel>
