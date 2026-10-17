@@ -73,19 +73,5 @@
       pre.appendChild(btn);
     });
   </script>
-<script>
-  (function() {
-    let initial = null;
-    setInterval(async () => {
-      try {
-        const r = await fetch('/dev_reload.txt', { cache: 'no-store' });
-        if (!r.ok) return;
-        const t = await r.text();
-        if (initial === null) initial = t;
-        else if (initial !== t) location.reload();
-      } catch (_) {}
-    }, 1000);
-  })();
-</script>
 </body>
 </html>
