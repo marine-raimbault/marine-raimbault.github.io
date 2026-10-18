@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
   <title>Text too long: restricting new data without breaking the old - Marine Raimbault Blog</title>
-  <meta name="description" content="Adding a rule for new data is easy. The hard part is the data that is already there.">
+  <meta name="description" content="How do I add a limit without breaking existing data? How do I migrate old data safely? What should I test, and when?">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Text too long: restricting new data without breaking the old">
-  <meta property="og:description" content="Adding a rule for new data is easy. The hard part is the data that is already there.">
+  <meta property="og:description" content="How do I add a limit without breaking existing data? How do I migrate old data safely? What should I test, and when?">
   <meta property="og:image" content="https://marine-raimbault.com/images/0005/write-without-check.png">
   <meta property="og:url" content="https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/">
   <meta name="twitter:card" content="summary_large_image">
@@ -75,6 +75,16 @@ Next time you add a limit</a>
 
   <div class="post-content">
     <p>
+<strong>This post answers:</strong></p>
+<ul>
+  <li>
+How do I add a limit without breaking existing data?  </li>
+  <li>
+How do I migrate old data safely?  </li>
+  <li>
+What should I test, and when?  </li>
+</ul>
+<p>
 Adding a rule for new data is easy. The hard part is the data that is already there.</p>
 <p>
 Imagine an app where users type labels, and one day we decide: at most 250 characters. We add the check, ship it, done? Not quite. Every label saved before today is still stored, and some are longer.</p>
