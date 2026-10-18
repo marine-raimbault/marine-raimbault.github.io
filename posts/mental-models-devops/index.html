@@ -180,14 +180,19 @@ What does “high performing” actually mean? DORA answers it with three surpri
 <p>
 The DORA metrics count successful change (= VALUE) delivered to the customer.</p>
 <details>
-  <summary>👉 <strong>Click to show the four metrics + the ABBA sandwich</strong></summary>
-  <ol>    <li><strong>Deployment frequency</strong> — how often do you deploy? (how often an idea goes from step 1 <em>plan</em> to step 5 <em>release</em>)</li>
-  <li><strong>Lead time to deployment</strong> — how long each deployment takes. That's the bottleneck.</li>
-  <li><strong>Change failure rate</strong> — if you deploy often <em>and</em> break things often, your product ends up worse for the customer than if you were deploying less. Unless…</li>
-  <li><strong>Mean time to recover</strong> — …you can fix errors fast.</li>  </ol>  
-<p>Looking at the picture, the four metrics form an ABBA sandwich:</p>
-  <ul>    <li><strong>A = change</strong> (outside): Deployment Frequency (count) + Lead Time to Deployment (time)</li>
-  <li><strong>B = errors</strong> (middle): Change Failure Rate (count) + Mean Time to Recover (time)</li>  </ul>  </details>
+  <summary>👉 <strong>Click to show the five metrics + the DORA mnemonic</strong></summary>
+
+<p><em>Updated October 2026: when I first wrote this post, DORA had four metrics (the "four keys"). DORA now uses five, in two groups: throughput and instability. The picture above still shows the old four.</em></p>
+
+<p><strong>Throughput: three speedometers.</strong> How fast does change flow to the customer, including the fix when something breaks? Measured in time or count.</p>
+  <ul>    <li><strong>D — Deployment frequency</strong>: how often you deploy to production.</li>
+  <li><strong>D — Delivery lead time</strong> (DORA calls it <em>change lead time</em>): how long a change takes from commit to production. That's where the bottleneck shows.</li>
+  <li><strong>R — Recovery time</strong> (<em>failed deployment recovery time</em>, formerly "mean time to recover"): how long it takes to get back on track after a deployment breaks something.</li>  </ul>  
+<p><strong>Instability: two smoke alarms.</strong> How often does change go wrong? Both are percentages.</p>
+  <ul>    <li><strong>O — Oops rate</strong> (<em>change fail rate</em>): the share of deployments that need immediate action, like a rollback or a hotfix.</li>
+  <li><strong>A — Again rate</strong> (<em>deployment rework rate</em>, new): the share of deployments that were not planned, made only to fix an incident in production.</li>  </ul>  
+<p>The mnemonic: <strong>DORA</strong>. The D counts twice (two speedometers), the R is the third speedometer, and O and A are the smoke alarms, <em>Oops</em> and <em>Again</em>. Rule of thumb: if it's a percentage, it's instability.</p>
+</details>
 <h2 id="whats-next-devsecops">
 What’s next: DevSecOps</h2>
 <p>
