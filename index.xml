@@ -8,7 +8,7 @@
     <atom:link href="https://marine-raimbault.com/index.xml" rel="self" type="application/rss+xml"/>
     
     <item>
-      <title>Text too long: restricting new data without breaking the old</title>
+      <title>Old data, new limit: how we fixed a too-long label that broke every page</title>
       <link>https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/</link>
       <guid>https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/</guid>
       <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
