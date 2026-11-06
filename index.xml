@@ -8,6 +8,14 @@
     <atom:link href="https://marine-raimbault.com/index.xml" rel="self" type="application/rss+xml"/>
     
     <item>
+      <title>Where does my app's state live? Tabs, reloads and when Vue runs created()</title>
+      <link>https://marine-raimbault.com/posts/where-does-my-app-state-live/</link>
+      <guid>https://marine-raimbault.com/posts/where-does-my-app-state-live/</guid>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Draft: structure + drawings only. Not deployed: no make deploy until the prose is written.]]></description>
+    </item>
+    
+    <item>
       <title>Text too long: restricting new data without breaking the old</title>
       <link>https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/</link>
       <guid>https://marine-raimbault.com/posts/text-too-long-restricting-new-data-without-breaking-the-old/</guid>
